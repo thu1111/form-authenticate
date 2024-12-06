@@ -52,17 +52,8 @@ input {
 }
 
 input:focus {
-  outline: none;
+  /* outline: none; */
 }
-/* input:invalid {
-  border: 2px solid red;
-  box-shadow: 0 0 5px red;
-}
-input:valid {
-  border: 2px solid blue;
-  outline: none;
-  box-shadow: 0 0 5px blue; 
-} */
 
 button {
   padding: 10px 15px;
