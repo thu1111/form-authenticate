@@ -34,7 +34,7 @@ const SignUpForm = ({setToken}) => {
 
         <form  onSubmit={handleSubmit}>
             <label>
-                User name: {" "}
+                User name:
                 <input value={username} onChange={(e)=>{setUsername(e.target.value)}}
                         pattern="[A-Za-z0-9]{8,12}" 
                         placeholder="8-12 Alphanumeric characters" 
@@ -45,7 +45,7 @@ const SignUpForm = ({setToken}) => {
             </label>
 
             <label>
-                Password: {" "}
+                Password:
                 <input type="password" value={password} onChange={(e)=>{setPassword(e.target.value)}}
                         minLength={8} maxLength={10} 
                         placeholder="Minimum 8 characters" 
