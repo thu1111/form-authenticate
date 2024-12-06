@@ -1,16 +1,13 @@
 import { useState } from "react";
 
 const Authenticate = ({token}) => {
-    const [successMsg, setSuccessMsg] = useState(null);
-    const [data, setData] =useState(null);
     const [error,setError] = useState(null);
-    // console.log(successMsg);    
-    // console.log(data);
-    // console.log(error);  
+    const [success, setSuccess] = useState(null);
+    const [data, setData] =useState(null);
 
     async function handleClick (){
         // console.log("authenticate handle click works");
-        setSuccessMsg(null);
+        setSuccess(null);
         setData(null);
         setError(null);
 
@@ -22,27 +19,23 @@ const Authenticate = ({token}) => {
         try {
             const response = await fetch ("https://fsa-jwt-practice.herokuapp.com/authenticate", {
                 method: "GET",
-                headers: {"Content-Type":"application/json",
-                            "Authorization":`Bearer ${token}`},
+                headers: {"Content-Type":"application/json","Authorization":`Bearer ${token}`},
             })
             const result = await response.json();
-            setSuccessMsg(result.message);    
+            // console.log(result);            
+            setSuccess(result.message);    
             setData(result.data); 
-            
         } catch (error) {
             setError(error.message, "There was an error, please try again!");
         }
     }
-    
+
     return ( 
         <div className="auth-container">
             <h2>Authentication</h2>
-            
-            {successMsg && <p className="auth-success-msg">{successMsg}</p>}
-                                        
-            {data && <p>Welcome {data.username} </p>}
-            
             {error && <p className="error-msg">{error}</p>}
+            {success && <p className="success-msg">{success}</p>}
+            {data && <p>Welcome {data.username} </p>}
 
             <button onClick={handleClick}>Authenticate Token!</button>
         </div>
@@ -50,3 +43,4 @@ const Authenticate = ({token}) => {
 }
  
 export default Authenticate;
+

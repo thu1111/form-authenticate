@@ -1,9 +1,10 @@
 import { useState } from "react";
 
-const SignUpForm = ({token, setToken}) => {
+const SignUpForm = ({setToken}) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error,setError] = useState(null);
+    const [signupMsg, setSignupMsg] = useState(null);
 
     async function handleSubmit(e){
         e.preventDefault();
@@ -14,7 +15,9 @@ const SignUpForm = ({token, setToken}) => {
                 body: JSON.stringify({username, password}),
             })
             const result = await response.json();
+            // console.log(result); 
             setToken(result.token);
+            setSignupMsg(result.message);
         } catch (error) {
             setError(error.message);            
         }
@@ -25,9 +28,9 @@ const SignUpForm = ({token, setToken}) => {
 
     return ( 
     <div className="signup-container">
-        <h2>Sign up </h2>
+        <h2>Sign up</h2>
         {error && <p className="error-msg">{error}</p>}
-        {token && <p className="signup-msg">Thank you for signing up!</p>}
+        {signupMsg && <p className="signup-msg">{signupMsg}</p>}
 
         <form  onSubmit={handleSubmit}>
             <label>
@@ -37,9 +40,10 @@ const SignUpForm = ({token, setToken}) => {
                         placeholder="8-12 Alphanumeric characters" 
                         onInvalid={(e) => e.target.setCustomValidity("Enter 8-12 Alphanumeric Characters")} 
                         onInput={(e) => e.target.setCustomValidity("")}
+                        onFocus={() => setSignupMsg(null)}
                         required/>
             </label>
-            <br />
+
             <label>
                 Password: {" "}
                 <input type="password" value={password} onChange={(e)=>{setPassword(e.target.value)}}
@@ -49,7 +53,7 @@ const SignUpForm = ({token, setToken}) => {
                         onInput={(e) => e.target.setCustomValidity("")}
                         required/>
             </label>
-            <br />
+
             <button type="submit">Submit</button>
         </form>
     </div>
@@ -57,3 +61,4 @@ const SignUpForm = ({token, setToken}) => {
 }
  
 export default SignUpForm;
+

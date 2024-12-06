@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div className='container'>
-        <SignUpForm token={token} setToken={setToken}/>
+        <SignUpForm setToken={setToken}/>
         <Authenticate token={token}/>
     </div>
   )
